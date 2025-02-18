@@ -1,0 +1,25 @@
+# Ignore sensitive files
+config/secrets.yaml
+.env
+
+# Ignore logs
+logs/
+
+# Ignore Python cache and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+venv/
+env/
+.venv/
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
