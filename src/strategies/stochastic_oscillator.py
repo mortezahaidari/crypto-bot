@@ -1,6 +1,8 @@
 # src/strategies/stochastic_oscillator.py
 import pandas as pd
 from .base_strategy import BaseStrategy
+# Add this to all strategy files
+from typing import Dict, Optional
 
 class StochasticOscillator(BaseStrategy):
     @property

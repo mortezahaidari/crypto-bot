@@ -1,6 +1,8 @@
 # src/strategies/macd.py
 import pandas as pd
 from src.strategies.base_strategy import BaseStrategy
+# Add this to all strategy files
+from typing import Dict, Optional
 
 class MACDStrategy(BaseStrategy):
     def generate_signal(self, data: pd.DataFrame, params: Dict[str, Any]) -> str:

@@ -1,6 +1,7 @@
 # src/strategies/sma_crossover.py
 import pandas as pd
 from .base_strategy import BaseStrategy
+from typing import Dict, Optional
 
 class SMACrossover(BaseStrategy):
     @property

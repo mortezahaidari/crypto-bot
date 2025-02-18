@@ -13,3 +13,6 @@ argparse==1.4.0  # Already included in Python 3.2+
 dash==2.14.2
 plotly==5.18.0
 pydantic==2.5.3
+python-dotenv==1.0.0
+python-crontab==2.6.0
+PyYAML==6.0.1

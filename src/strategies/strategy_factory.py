@@ -1,5 +1,5 @@
 # src/strategies/strategy_factory.py
-from typing import Dict, Any
+from typing import Dict, Any, List, Type
 from .base_strategy import BaseStrategy
 from .sma_crossover import SMACrossover
 from .atr_filter import ATRFilter

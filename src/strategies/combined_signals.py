@@ -2,6 +2,8 @@
 from typing import List, Dict
 import pandas as pd
 from .base_strategy import BaseStrategy
+# Add this to all strategy files
+from typing import Dict, Optional
 
 class CombinedStrategy(BaseStrategy):
     def __init__(self, strategies: List[BaseStrategy]):

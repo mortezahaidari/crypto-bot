@@ -1,17 +1,15 @@
-# src/data/fetcher.py (updated)
+# Add this at the top of the file
+import pandas as pd
+
 class DataFetcher:
-    def __init__(self, use_cache: bool = True):
-        self.db = DatabaseClient()
-        self.use_cache = use_cache
+    def __init__(self, exchange):
+        self.exchange = exchange
 
     def fetch_data(self, symbol: str) -> pd.DataFrame:
-        # Try to load cached data first
-        if self.use_cache:
-            cached_data = self.db.load_ohlcv(symbol)
-            if not cached_data.empty:
-                return cached_data
-
-        # Fetch fresh data if cache is empty
-        data = self.exchange.fetch_ohlcv(symbol)
-        self.db.save_ohlcv(symbol, data)
-        return data
+        """Fetch OHLCV data and return as DataFrame"""
+        try:
+            data = self.exchange.fetch_ohlcv(symbol, timeframe='1m', limit=100)
+            return pd.DataFrame(data, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
+        except Exception as e:
+            print(f"Data fetch error: {e}")
+            return pd.DataFrame()  # Return empty DF instead of None

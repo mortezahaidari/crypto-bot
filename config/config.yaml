@@ -1,38 +1,46 @@
-# Trading pairs
-trading_pairs:
-  - BTC/USDT
-  - ETH/USDT
-interval: 1m  # Data interval (e.g., 1 minute)
-strategy: moving_average  # Default strategy
+# config/config.yaml
+---
+# Core trading parameters
+trading_pair: BTC/USDT  # Single pair for focus
+interval: 5m            # Align with scheduler interval
 
+# Exchange configuration (single active exchange)
+exchange:
+  id: binance
+  api_key: "your_binance_key"
+  api_secret: "your_binance_secret"
+  enabled: true
 
-# Strategies
-strategies:
-  primary:
-    type: combined
-    consensus_threshold: 2
-    strategies:
-      - type: sma_crossover
-        params:
-          short_window: 50
-          long_window: 200
-      - type: stochastic
-        params:
-          k_period: 14
-          d_period: 3
-          overbought: 80
-          oversold: 20
+# Primary strategy configuration
+strategy:
+  type: weighted
+  params:
+    buy_threshold: 0.65
+  strategies:
+    - type: moving_average
+      params:
+        short_window: 10
+        long_window: 50
+    - type: stochastic
+      params:
+        k_period: 14
+        d_period: 3
+        overbought: 80
+        oversold: 20
 
-# Risk params
+# Risk management
 risk_params:
-  max_position_size: 0.1  # 10% of total balance
-  stop_loss_pct: 2.0      # 2% stop-loss
-  take_profit_pct: 3.0    # 3% take-profit
-  risk_per_trade: 1.0      # 1% risk per trade    
+  max_position_size: 0.1
+  risk_per_trade: 0.01
+  stop_loss_pct: 2.0
+  take_profit_pct: 3.0
+  max_daily_drawdown: 5.0
+  consecutive_loss_limit: 3
+  initial_balance: 10000.0
 
-
+# System configuration
 scheduler:
-  interval: 5m  # Default strategy execution interval
+  interval: 5m  # Execution interval
 
 database:
   path: "data/crypto_data.db"
@@ -46,14 +54,4 @@ monitoring:
   health_checks:
     cpu: 80
     memory: 90
-
-
-exchanges:
-  - id: binance
-    api_key: "your_binance_key"
-    api_secret: "your_binance_secret"
-    enabled: true
-  - id: kraken
-    api_key: "your_kraken_key"
-    api_secret: "your_kraken_secret"
-    enabled: false    
+# Add a blank line below this comment →    

@@ -112,6 +112,10 @@ exchanges:
 
 5. Run the Bot
 
+## Environment Setup
+1. Create `.env` from `.env.example`
+2. Set `BINANCE_API_KEY` and `BINANCE_API_SECRET`
+
 # Start normally
 ./scripts/start_bot.sh
 
