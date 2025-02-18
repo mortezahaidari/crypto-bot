@@ -1,18 +1,17 @@
+# src/strategies/moving_average.py
 import pandas as pd
 from src.strategies.base_strategy import BaseStrategy
 
-class MovingAverageStrategy(BaseStrategy):
-    def __init__(self, short_window=10, long_window=50):
-        self.short_window = short_window
-        self.long_window = long_window
+class MovingAverageCrossover(BaseStrategy):
+    def generate_signal(self, data: pd.DataFrame, params: Dict[str, Any]) -> str:
+        short_window = params.get("short_window", 10)
+        long_window = params.get("long_window", 50)
 
-    def generate_signal(self, data):
-        df = pd.DataFrame(data, columns=["timestamp", "open", "high", "low", "close", "volume"])
-        df["short_ma"] = df["close"].rolling(window=self.short_window).mean()
-        df["long_ma"] = df["close"].rolling(window=self.long_window).mean()
+        data["short_ma"] = data["close"].rolling(window=short_window).mean()
+        data["long_ma"] = data["close"].rolling(window=long_window).mean()
 
-        if df["short_ma"].iloc[-1] > df["long_ma"].iloc[-1]:
+        if data["short_ma"].iloc[-1] > data["long_ma"].iloc[-1]:
             return "buy"
-        elif df["short_ma"].iloc[-1] < df["long_ma"].iloc[-1]:
+        elif data["short_ma"].iloc[-1] < data["long_ma"].iloc[-1]:
             return "sell"
-        return None
+        return "hold"

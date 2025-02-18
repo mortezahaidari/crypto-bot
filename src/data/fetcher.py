@@ -1,16 +1,17 @@
-import ccxt
-from src.monitoring.logger import logger
-
+# src/data/fetcher.py (updated)
 class DataFetcher:
-    def __init__(self):
-        self.exchange = ccxt.binance()
+    def __init__(self, use_cache: bool = True):
+        self.db = DatabaseClient()
+        self.use_cache = use_cache
 
-    def fetch_data(self):
-        """Fetch market data from the exchange."""
-        try:
-            data = self.exchange.fetch_ohlcv("BTC/USDT", timeframe="1m", limit=100)
-            logger.info("Data fetched successfully.")
-            return data
-        except Exception as e:
-            logger.error(f"Error fetching data: {e}")
-            return None
+    def fetch_data(self, symbol: str) -> pd.DataFrame:
+        # Try to load cached data first
+        if self.use_cache:
+            cached_data = self.db.load_ohlcv(symbol)
+            if not cached_data.empty:
+                return cached_data
+
+        # Fetch fresh data if cache is empty
+        data = self.exchange.fetch_ohlcv(symbol)
+        self.db.save_ohlcv(symbol, data)
+        return data
