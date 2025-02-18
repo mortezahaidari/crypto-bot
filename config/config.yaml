@@ -1,0 +1,5 @@
+trading_pairs:
+  - BTC/USDT
+  - ETH/USDT
+interval: 1m  # Data interval (e.g., 1 minute)
+strategy: moving_average  # Default strategy
