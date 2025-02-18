@@ -158,14 +158,3 @@ Open a GitHub Issue
 Email: your.email@example.com
 
 
-
----
-
-### How to Use This:
-1. **Copy the entire code block above**.
-2. Replace these placeholders:
-   - `yourusername` in the clone URL
-   - `your.email@example.com` in the support section
-3. Paste into your `README.md` file.
-
-Let me know if you need adjustments! 🚀
