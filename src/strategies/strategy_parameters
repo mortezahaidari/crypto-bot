@@ -1,0 +1,6 @@
+# src/strategies/strategy_parameters.py
+from pydantic import BaseModel
+
+class StrategyParameters(BaseModel):
+    class Config:
+        extra = 'forbid'
